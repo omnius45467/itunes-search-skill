@@ -1,4 +1,4 @@
-var itunes = require('itunes-search')
+var itunes = require('itunes-search');
  
 // http://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html#searching 
 // // options example: 
@@ -9,18 +9,18 @@ var itunes = require('itunes-search')
 // //  , limit: 50 
 // //  , explicit: "No" // explicit material 
 // // } 
- var options = {
-	media: "movie", 
-	entity: "movie",
+var options = {
+	media: "tvShow",
+	entity: "tvSeason",
 	limit: 25
-}
+};
 //          
-itunes.search( "jfkldsjfklds", options,
+itunes.search( "stargate", options,
 	function(response, err) {
     if (err) {
 		console.log(err);
 	} else {
 		console.log(response);
-		console.log(response.results[0]);
+		// console.log(response.results[0]);
 	}  
-})
+});

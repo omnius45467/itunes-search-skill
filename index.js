@@ -15,7 +15,7 @@ app.launch(function (request, response) {
 /**
  * SearchIntentRequest.
  */
-app.intent('SearchIntent',
+app.intent('MovieSearchIntent',
     {
         'slots': {'movie': 'MOVIES'},
         'utterances': ['find {movie}']
@@ -30,11 +30,12 @@ app.intent('SearchIntent',
         setTimeout(itunes.search(movie, options,
             function (res) {
                 if(res.resultCount > 0){
-                    response.say(res.results[0].trackName+' is availible on the iTunes store for '+res.results[0].trackPrice+' dollars');
+                    // response.say('I found '+res.results.length+' for '+movie);
+                    response.say(res.results[0].trackName+' is available on the iTunes store for '+res.results[0].trackPrice+' dollars');
                     response.card(res.results[0].trackName, res.results[0].longDescription, res.results[0].trackName, res.results[0].artworkUrl60);
                 }else{
-                    response.say("I couldn't find "+movie);
-                    response.card("Can't find "+movie);
+                    response.say("Excuse me? I Can't find that");
+                    response.card("Excuse me? I Can't find that");
                 }
                 // response.say(res.results[0].trackName);
                 response.shouldEndSession(false);
@@ -44,29 +45,36 @@ app.intent('SearchIntent',
     });
 
 /**
- * IntentRequest w/ asynchronous response.
+ * SearchIntentRequest.
  */
-app.intent('checkStatus',
+app.intent('TVShowSearchIntent',
     {
-        'utterances': [
-            'status check', 'what is the status', 'tell me the status'
-        ]
+        'slots': {'tvshow': 'TVSHOWS'},
+        'utterances': ['find {tvshow}']
     },
     function (request, response) {
-        setTimeout(function () {		// simulate an async request
-
-            // This is async and will run after a brief delay
-            response.say('Status is operational, mam!');
-
-            // Must call send to end the original request
-            response.send();
-
-        }, 250);
-
-        // Return false immediately so alexa-app doesn't send the response
+        var tvShow = request.slot('tvshow');
+        var options = {
+            media: "tvShow",
+            entity: "tvSeason",
+            limit: 25
+        };
+        setTimeout(itunes.search(tvShow, options,
+            function (res) {
+                if(res.resultCount > 0){
+                    // response.say('I found '+res.results.length+' for '+tvShow);
+                    response.say('I found '+res.results[0].collectionName+' available on the iTunes store for '+res.results[0].collectionPrice+' dollars');
+                    response.card(res.results[0].collectionName, res.results[0].longDescription, res.results[0].trackName, res.results[0].artworkUrl60);
+                }else{
+                    response.say("Excuse me? I Can't find that");
+                    response.card("Excuse me? I Can't find that");
+                }
+                // response.say(res.results[0].trackName);
+                response.shouldEndSession(false);
+                response.send();
+            }), 250);
         return false;
-    }
-);
+    });
 
 
 /**
