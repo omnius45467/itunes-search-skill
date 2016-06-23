@@ -1,6 +1,6 @@
-# Alexa Boilerplate
+# Search iTunes Skill
 
-Quickly get started developing Amazon Alexa skills for you Amazon Echo.
+Install the Alexa Skill to be able to search for iTunes media.
 
 ## Setup
 
