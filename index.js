@@ -7,7 +7,6 @@ var app = new alexa.app();
  */
 app.launch(function (request, response) {
     response.say('Search the iTunes store with your voice');
-    response.card('Find that movie you have been trying to find');
     response.shouldEndSession(false);
 });
 
@@ -75,7 +74,6 @@ app.intent('TVShowSearchIntent',
             }), 250);
         return false;
     });
-
 
 /**
  * Error handler for any thrown errors.
