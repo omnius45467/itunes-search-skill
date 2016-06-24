@@ -28,11 +28,24 @@ app.intent('MovieSearchIntent',
         };
         setTimeout(itunes.search(movie, options,
             function (res) {
-                if(res.resultCount > 0){
-                    // response.say('I found '+res.results.length+' for '+movie);
-                    response.say(res.results[0].trackName+' is available on the iTunes store for '+res.results[0].trackPrice+' dollars');
-                    response.card(res.results[0].trackName, res.results[0].longDescription, res.results[0].trackName, res.results[0].artworkUrl60);
-                }else{
+                if (res.resultCount > 0) {
+                    var price = res.results[0].collectionPrice;
+                    if (price != undefined) {
+                        response.say('I found ' + res.resultCount +
+                            ' for ' + movie + ', ' + res.results[0].trackName +
+                            ' is available on the iTunes store for ' + res.results[0].collectionPrice +
+                            ' dollars');
+                    } else {
+                        response.say('I found ' + res.resultCount +
+                            ' for ' + movie + ', ' + res.results[0].trackName +
+                            ' is available on the iTunes store for pre order');
+                    }
+                    response.card({
+                        type: "Simple",
+                        title: res.results[0].trackName,  //this is not required for type Simple OR Standard
+                        text: res.results[0].longDescription
+                    });
+                } else {
                     response.say("Excuse me? I Can't find that");
                     response.card("Excuse me? I Can't find that");
                 }
@@ -60,11 +73,17 @@ app.intent('TVShowSearchIntent',
         };
         setTimeout(itunes.search(tvShow, options,
             function (res) {
-                if(res.resultCount > 0){
-                    // response.say('I found '+res.results.length+' for '+tvShow);
-                    response.say('I found '+res.results[0].collectionName+' available on the iTunes store for '+res.results[0].collectionPrice+' dollars');
-                    response.card(res.results[0].collectionName, res.results[0].longDescription, res.results[0].trackName, res.results[0].artworkUrl60);
-                }else{
+                if (res.resultCount > 0) {
+                    var price = res.results[0].collectionPrice;
+
+                    if (price != undefined) {
+                        response.say('I found ' + res.results[0].collectionName + ' available on the iTunes store for ' + res.results[0].collectionPrice + ' dollars')
+                    } else {
+                        response.say('I found ' + res.results[0].collectionName + ' available on the iTunes store for pre order')
+                    }
+                    // response.say('I found ' + res.results[0].collectionName + ' available on the iTunes store for ' + res.results[0].collectionPrice + ' dollars');
+                    response.card(res.results[0].collectionName, res.results[0].longDescription, res.results[0].collectionName, res.results[0].artworkUrl60);
+                } else {
                     response.say("Excuse me? I Can't find that");
                     response.card("Excuse me? I Can't find that");
                 }
@@ -75,6 +94,23 @@ app.intent('TVShowSearchIntent',
         return false;
     });
 
+/**
+ * SearchIntentRequest.
+ */
+app.intent('EndSearchIntent',
+    {
+        'utterances': [
+            'end',
+            'end search',
+            'terminate',
+            'stop'
+        ]
+    },
+    function (request, response) {
+        response.shouldEndSession(true);
+        response.send();
+        return false;
+    });
 /**
  * Error handler for any thrown errors.
  */

@@ -15,7 +15,7 @@ var options = {
 	limit: 25
 };
 //          
-itunes.search( "stargate", options,
+itunes.search( "star trek", options,
 	function(response, err) {
     if (err) {
 		console.log(err);
