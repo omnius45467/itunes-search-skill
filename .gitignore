@@ -10,7 +10,7 @@ node_modules
 .idea
 
 .DS_Store
-
+gulpfile.js
 # PROJECT SPECIFIC
 dist
 .idea/compiler.xml
