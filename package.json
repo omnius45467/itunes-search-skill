@@ -1,8 +1,8 @@
 {
   "private": "true",
-  "name": "alexa_boilerplate",
+  "name": "itunes-search",
   "version": "v1.0.0",
-  "description": "A skill for Amazon Alexa",
+  "description": "A skill for Amazon Alexa to search the itunes store",
   "scripts": {},
   "dependencies": {
     "alexa-app": "2.3.4",
