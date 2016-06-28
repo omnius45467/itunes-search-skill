@@ -8,9 +8,9 @@ To get started simple use `npm install` to install all dependencies.
 
 ## Deploying to Amazon Lambda
 
-To deploy your skill you will need to use the `gulp` command to zip up the file and drop into Lambda.
+To deploy your skill you will need to use the `grunt lambda_package` command to zip up the file and drop into Lambda.
 
-## The Sample Project
+## The iTunes Skill
 
 Check out `index.js` for the boilerplate Alexa app. Examples of how to define an intent handler, build sample utterences and schema, and response asynchronously are all included. You can also see example projects located in the `examples/` directory.
 
@@ -23,4 +23,4 @@ Each Alexa skill requires a Lambda function.
 3. Choose to skip the "Select blueprint" phase
 4. Give your function a name and description.
 5. Set the role and create your function.
-6. Using the `gulp` command upload the zip file from the newly created `dist` directory.
+6. Using the `grunt lambda_package` command upload the zip file from the newly created `dist` directory.
