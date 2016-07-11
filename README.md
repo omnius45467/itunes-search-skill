@@ -1,5 +1,7 @@
 # Search iTunes Skill
 
+This skill is apart of the [Geekwise Alexa Course](https://github.com/sammyboy45467/geekwise-alexa-course)
+
 Install the Alexa Skill to be able to search for iTunes media.
 
 ## Setup
